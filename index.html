@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Days Worked and Days Left Until Retirement</title>
+</head>
+<body>
+    <h1>Days Worked and Days Left Until Retirement</h1>
+    <p>You joined the office on 02nd May 2023 afternoon.</p>
+    <p>Today's date is 30th July 2023.</p>
+
+    <p id="daysWorked"></p>
+
+    <h2>Retirement Information</h2>
+    <p>You were born on 13th March 1996.</p>
+    <p>The retirement age in your office is 58.</p>
+
+    <p id="daysLeft"></p>
+
+    <script>
+        // Function to calculate the number of days between two dates
+        function getDaysWorked() {
+            const startDate = new Date('2023-05-02T12:00:00'); // Assuming you joined at noon (12:00 PM) on May 2nd, 2023
+            const today = new Date('2023-07-30T00:00:00'); // Current date at midnight on July 30th, 2023
+
+            const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+            const daysWorked = Math.round(Math.abs((today - startDate) / oneDay));
+
+            return daysWorked;
+        }
+
+        // Function to calculate the number of days left until retirement
+        function getDaysLeft() {
+            const birthDate = new Date('1996-03-13T00:00:00'); // Your date of birth at midnight
+            const retirementAge = 58;
+
+            const retirementDate = new Date(birthDate);
+            retirementDate.setFullYear(birthDate.getFullYear() + retirementAge);
+
+            const today = new Date();
+
+            if (retirementDate <= today) {
+                return "Congratulations! You have already reached the retirement age.";
+            } else {
+                const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+                const daysLeft = Math.ceil(Math.abs((retirementDate - today) / oneDay));
+                return daysLeft;
+            }
+        }
+
+        // Display the days worked and days left until retirement on the webpage
+        const daysWorkedElement = document.getElementById('daysWorked');
+        daysWorkedElement.textContent = `You have worked ${getDaysWorked()} days in your office.`;
+
+        const daysLeftElement = document.getElementById('daysLeft');
+        daysLeftElement.textContent = `You have ${getDaysLeft()} days left until retirement.`;
+    </script>
+</body>
+</html>
