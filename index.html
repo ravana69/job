@@ -6,7 +6,7 @@
 <body>
     <h1>Days Worked and Days Left Until Retirement</h1>
     <p>You joined the office on 02nd May 2023 afternoon.</p>
-    <p>Today's date is 30th July 2023.</p>
+    <p id="todaysDate"></p>
 
     <p id="daysWorked"></p>
 
@@ -20,7 +20,7 @@
         // Function to calculate the number of days between two dates
         function getDaysWorked() {
             const startDate = new Date('2023-05-02T12:00:00'); // Assuming you joined at noon (12:00 PM) on May 2nd, 2023
-            const today = new Date('2023-07-30T00:00:00'); // Current date at midnight on July 30th, 2023
+            const today = new Date(); // Current date and time
 
             const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
             const daysWorked = Math.round(Math.abs((today - startDate) / oneDay));
@@ -47,7 +47,12 @@
             }
         }
 
-        // Display the days worked and days left until retirement on the webpage
+        // Display today's date, days worked, and days left until retirement on the webpage
+        const todaysDateElement = document.getElementById('todaysDate');
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        todaysDateElement.textContent = `Today's date is ${today.toLocaleDateString('en-IN', options)}`;
+
         const daysWorkedElement = document.getElementById('daysWorked');
         daysWorkedElement.textContent = `You have worked ${getDaysWorked()} days in your office.`;
 
